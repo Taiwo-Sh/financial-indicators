@@ -60,13 +60,10 @@ def beta(
 
     # Calculate covariance and variance
     covariance = sum(
-        (a - asset_mean) * (m - market_mean)
-        for a, m in zip(asset_returns, market_returns)
+        (a - asset_mean) * (m - market_mean) for a, m in zip(asset_returns, market_returns)
     ) / (n - 1)
 
-    market_variance = sum((m - market_mean) ** 2 for m in market_returns) / (
-        n - 1
-    )
+    market_variance = sum((m - market_mean) ** 2 for m in market_returns) / (n - 1)
 
     if market_variance == 0:
         raise InvalidInputError("market_returns has zero variance")

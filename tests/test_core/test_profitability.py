@@ -27,20 +27,20 @@ class TestReturnOnInvestment:
         """Test ROI with positive return."""
         net_profit = Decimal("500")
         investment = Decimal("2000")
-        result = return_on_investment(net_profit, investment)
-        assert_decimal_equal(result, Decimal("25.00"))
+        result = return_on_investment(net_profit=net_profit, total_investment=investment)
+        assert_decimal_equal(actual=result, expected=Decimal("25.00"))
 
     def test_roi_negative_return(self):
         """Test ROI with negative return (loss)."""
         net_profit = Decimal("-200")
         investment = Decimal("1000")
-        result = return_on_investment(net_profit, investment)
-        assert_decimal_equal(result, Decimal("-20.00"))
+        result = return_on_investment(net_profit=net_profit, total_investment=investment)
+        assert_decimal_equal(actual=result, expected=Decimal("-20.00"))
 
     def test_roi_zero_investment_raises_error(self):
         """Test that zero investment raises error."""
         with pytest.raises(InvalidInputError):
-            return_on_investment(Decimal("100"), Decimal("0"))
+            return_on_investment(net_profit=Decimal("100"), total_investment=Decimal("0"))
 
 
 class TestReturnOnAssets:
@@ -50,13 +50,13 @@ class TestReturnOnAssets:
         """Test ROA with standard inputs."""
         net_income = Decimal("50000")
         total_assets = Decimal("500000")
-        result = return_on_assets(net_income, total_assets)
-        assert_decimal_equal(result, Decimal("10.00"))
+        result = return_on_assets(net_income=net_income, total_assets=total_assets)
+        assert_decimal_equal(actual=result, expected=Decimal("10.00"))
 
     def test_roa_negative_assets_raises_error(self):
         """Test that negative assets raises error."""
         with pytest.raises(InvalidInputError):
-            return_on_assets(Decimal("50000"), Decimal("-500000"))
+            return_on_assets(net_income=Decimal("50000"), total_assets=Decimal("-500000"))
 
 
 class TestReturnOnEquity:
@@ -66,13 +66,13 @@ class TestReturnOnEquity:
         """Test ROE with standard inputs."""
         net_income = Decimal("50000")
         equity = Decimal("250000")
-        result = return_on_equity(net_income, equity)
-        assert_decimal_equal(result, Decimal("20.00"))
+        result = return_on_equity(net_income=net_income, shareholders_equity=equity)
+        assert_decimal_equal(actual=result, expected=Decimal("20.00"))
 
     def test_roe_zero_equity_raises_error(self):
         """Test that zero equity raises error."""
         with pytest.raises(InvalidInputError):
-            return_on_equity(Decimal("50000"), Decimal("0"))
+            return_on_equity(net_income=Decimal("50000"), shareholders_equity=Decimal("0"))
 
 
 class TestGrossProfitMargin:
@@ -82,13 +82,13 @@ class TestGrossProfitMargin:
         """Test gross profit margin."""
         gross_profit = Decimal("400000")
         revenue = Decimal("1000000")
-        result = gross_profit_margin(gross_profit, revenue)
-        assert_decimal_equal(result, Decimal("40.00"))
+        result = gross_profit_margin(gross_profit=gross_profit, revenue=revenue)
+        assert_decimal_equal(actual=result, expected=Decimal("40.00"))
 
     def test_gpm_zero_revenue_raises_error(self):
         """Test that zero revenue raises error."""
         with pytest.raises(InvalidInputError):
-            gross_profit_margin(Decimal("400000"), Decimal("0"))
+            gross_profit_margin(gross_profit=Decimal("400000"), revenue=Decimal("0"))
 
 
 class TestOperatingProfitMargin:
@@ -98,8 +98,8 @@ class TestOperatingProfitMargin:
         """Test operating profit margin."""
         operating_income = Decimal("200000")
         revenue = Decimal("1000000")
-        result = operating_profit_margin(operating_income, revenue)
-        assert_decimal_equal(result, Decimal("20.00"))
+        result = operating_profit_margin(operating_income=operating_income, revenue=revenue)
+        assert_decimal_equal(actual=result, expected=Decimal("20.00"))
 
 
 class TestNetProfitMargin:
@@ -109,15 +109,15 @@ class TestNetProfitMargin:
         """Test net profit margin."""
         net_income = Decimal("100000")
         revenue = Decimal("1000000")
-        result = net_profit_margin(net_income, revenue)
-        assert_decimal_equal(result, Decimal("10.00"))
+        result = net_profit_margin(net_income=net_income, revenue=revenue)
+        assert_decimal_equal(actual=result, expected=Decimal("10.00"))
 
     def test_npm_negative_margin(self):
         """Test net profit margin with loss."""
         net_income = Decimal("-50000")
         revenue = Decimal("1000000")
-        result = net_profit_margin(net_income, revenue)
-        assert_decimal_equal(result, Decimal("-5.00"))
+        result = net_profit_margin(net_income=net_income, revenue=revenue)
+        assert_decimal_equal(actual=result, expected=Decimal("-5.00"))
 
 
 class TestEBITDA:
@@ -130,8 +130,14 @@ class TestEBITDA:
         taxes = Decimal("30000")
         depreciation = Decimal("40000")
         amortization = Decimal("10000")
-        result = ebitda(net_income, interest, taxes, depreciation, amortization)
-        assert_decimal_equal(result, Decimal("200000.00"))
+        result = ebitda(
+            net_income=net_income,
+            interest=interest,
+            taxes=taxes,
+            depreciation=depreciation,
+            amortization=amortization,
+        )
+        assert_decimal_equal(actual=result, expected=Decimal("200000.00"))
 
     def test_ebitda_zero_da(self):
         """Test EBITDA with zero depreciation and amortization."""
@@ -140,8 +146,14 @@ class TestEBITDA:
         taxes = Decimal("30000")
         depreciation = Decimal("0")
         amortization = Decimal("0")
-        result = ebitda(net_income, interest, taxes, depreciation, amortization)
-        assert_decimal_equal(result, Decimal("150000.00"))
+        result = ebitda(
+            net_income=net_income,
+            interest=interest,
+            taxes=taxes,
+            depreciation=depreciation,
+            amortization=amortization,
+        )
+        assert_decimal_equal(actual=result, expected=Decimal("150000.00"))
 
 
 class TestEBIT:
@@ -152,8 +164,8 @@ class TestEBIT:
         revenue = Decimal("1000000")
         cogs = Decimal("600000")
         opex = Decimal("200000")
-        result = ebit(revenue, cogs, opex)
-        assert_decimal_equal(result, Decimal("200000.00"))
+        result = ebit(revenue=revenue, cogs=cogs, operating_expenses=opex)
+        assert_decimal_equal(actual=result, expected=Decimal("200000.00"))
 
 
 class TestProfitabilityIndex:
@@ -163,20 +175,26 @@ class TestProfitabilityIndex:
         """Test PI with profitable project."""
         pv_cash_flows = Decimal("1200000")
         investment = Decimal("1000000")
-        result = profitability_index(pv_cash_flows, investment)
-        assert_decimal_equal(result, Decimal("1.2000"))
+        result = profitability_index(
+            present_value_cash_flows=pv_cash_flows, initial_investment=investment
+        )
+        assert_decimal_equal(actual=result, expected=Decimal("1.2000"))
 
     def test_pi_less_than_one(self):
         """Test PI with unprofitable project."""
         pv_cash_flows = Decimal("800000")
         investment = Decimal("1000000")
-        result = profitability_index(pv_cash_flows, investment)
-        assert_decimal_equal(result, Decimal("0.8000"))
+        result = profitability_index(
+            present_value_cash_flows=pv_cash_flows, initial_investment=investment
+        )
+        assert_decimal_equal(actual=result, expected=Decimal("0.8000"))
 
     def test_pi_zero_investment_raises_error(self):
         """Test that zero investment raises error."""
         with pytest.raises(InvalidInputError):
-            profitability_index(Decimal("1200000"), Decimal("0"))
+            profitability_index(
+                present_value_cash_flows=Decimal("1200000"), initial_investment=Decimal("0")
+            )
 
 
 class TestEconomicValueAdded:
@@ -187,18 +205,20 @@ class TestEconomicValueAdded:
         nopat = Decimal("500000")
         capital = Decimal("2000000")
         wacc = Decimal("0.12")
-        result = economic_value_added(nopat, capital, wacc)
-        assert_decimal_equal(result, Decimal("260000.00"))
+        result = economic_value_added(nopat=nopat, capital_employed=capital, wacc=wacc)
+        assert_decimal_equal(actual=result, expected=Decimal("260000.00"))
 
     def test_eva_negative(self):
         """Test EVA with value destruction."""
         nopat = Decimal("200000")
         capital = Decimal("2000000")
         wacc = Decimal("0.12")
-        result = economic_value_added(nopat, capital, wacc)
-        assert_decimal_equal(result, Decimal("-40000.00"))
+        result = economic_value_added(nopat=nopat, capital_employed=capital, wacc=wacc)
+        assert_decimal_equal(actual=result, expected=Decimal("-40000.00"))
 
     def test_eva_zero_capital_raises_error(self):
         """Test that zero capital raises error."""
         with pytest.raises(InvalidInputError):
-            economic_value_added(Decimal("500000"), Decimal("0"), Decimal("0.12"))
+            economic_value_added(
+                nopat=Decimal("500000"), capital_employed=Decimal("0"), wacc=Decimal("0.12")
+            )

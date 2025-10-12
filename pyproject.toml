@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "financial-indicators"
 version = "0.1.0"
-description = "Essential financial and economic indicators with decimal precision"
+description = "Essential financial and economic indicators"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }

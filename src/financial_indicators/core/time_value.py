@@ -12,9 +12,7 @@ from financial_indicators.validation import (
 )
 
 
-def net_present_value(
-    cash_flows: typing.Sequence[Decimal], discount_rate: Decimal
-) -> Decimal:
+def net_present_value(cash_flows: typing.Sequence[Decimal], discount_rate: Decimal) -> Decimal:
     """
     Calculate Net Present Value of a series of cash flows.
 
@@ -93,9 +91,7 @@ def internal_rate_of_return(
 
     # Check for sign changes - IRR requires at least one
     sign_changes = sum(
-        1
-        for i in range(len(cash_flows) - 1)
-        if (cash_flows[i] * cash_flows[i + 1]) < 0
+        1 for i in range(len(cash_flows) - 1) if (cash_flows[i] * cash_flows[i + 1]) < 0
     )
     if sign_changes == 0:
         return None
@@ -124,14 +120,10 @@ def internal_rate_of_return(
         # Newton-Raphson update
         irr = irr - (npv / npv_derivative)
 
-    raise ConvergenceError(
-        f"IRR calculation did not converge within {max_iterations} iterations"
-    )
+    raise ConvergenceError(f"IRR calculation did not converge within {max_iterations} iterations")
 
 
-def present_value(
-    future_value: Decimal, discount_rate: Decimal, periods: int
-) -> Decimal:
+def present_value(future_value: Decimal, discount_rate: Decimal, periods: int) -> Decimal:
     """
     Calculate present value of a future amount.
 
@@ -203,9 +195,7 @@ def future_value(present_value: Decimal, growth_rate: Decimal, periods: int) -> 
     return fv
 
 
-def annuity_present_value(
-    payment: Decimal, discount_rate: Decimal, periods: int
-) -> Decimal:
+def annuity_present_value(payment: Decimal, discount_rate: Decimal, periods: int) -> Decimal:
     """
     Calculate present value of an ordinary annuity.
 
@@ -237,15 +227,11 @@ def annuity_present_value(
     if periods <= 0:
         raise InvalidInputError(f"periods must be positive, got {periods}")
 
-    pv = payment * (
-        (1 - (1 + discount_rate) ** (-periods)) / discount_rate
-    )
+    pv = payment * ((1 - (1 + discount_rate) ** (-periods)) / discount_rate)
     return pv
 
 
-def annuity_future_value(
-    payment: Decimal, growth_rate: Decimal, periods: int
-) -> Decimal:
+def annuity_future_value(payment: Decimal, growth_rate: Decimal, periods: int) -> Decimal:
     """
     Calculate future value of an ordinary annuity.
 
@@ -319,7 +305,7 @@ def payback_period(cash_flows: typing.Sequence[Decimal]) -> typing.Optional[Deci
             unrecovered = cumulative - cf
             if cf != 0:
                 fraction = abs(unrecovered) / cf
-                return (Decimal(period - 1) + fraction)
+                return Decimal(period - 1) + fraction
             return Decimal(period)
 
     return None  # Payback never occurs
@@ -367,7 +353,7 @@ def discounted_payback_period(
             unrecovered = cumulative - discounted_cf
             if discounted_cf != 0:
                 fraction = abs(unrecovered) / discounted_cf
-                return (Decimal(period - 1) + fraction)
+                return Decimal(period - 1) + fraction
             return Decimal(period)
 
     return None  # Payback never occurs

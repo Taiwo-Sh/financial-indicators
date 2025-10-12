@@ -6,14 +6,14 @@ from decimal import ROUND_HALF_UP, Decimal
 def quantize_decimal(value: Decimal, decimal_places: int = 2) -> Decimal:
     """
     Quantize a Decimal value to a specific number of decimal places.
-    
+
     Args:
         value: The Decimal value to quantize
         decimal_places: Number of decimal places (default: 2)
-        
+
     Returns:
         Quantized Decimal value
-        
+
     Example:
         >>> quantize_decimal(Decimal("12.3456"), 2)
         Decimal('12.35')
@@ -25,12 +25,12 @@ def quantize_decimal(value: Decimal, decimal_places: int = 2) -> Decimal:
 def assert_decimal_equal(actual: Decimal, expected: Decimal, decimal_places: int = 2):
     """
     Assert that two Decimal values are equal after quantization.
-    
+
     Args:
         actual: Actual value from function
         expected: Expected value
         decimal_places: Number of decimal places to compare (default: 2)
-        
+
     Raises:
         AssertionError: If values don't match after quantization
     """

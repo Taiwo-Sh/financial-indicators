@@ -315,9 +315,7 @@ def ebit(revenue: Decimal, cogs: Decimal, operating_expenses: Decimal) -> Decima
     return result
 
 
-def profitability_index(
-    present_value_cash_flows: Decimal, initial_investment: Decimal
-) -> Decimal:
+def profitability_index(present_value_cash_flows: Decimal, initial_investment: Decimal) -> Decimal:
     """
     Calculate Profitability Index (PI).
 
@@ -356,9 +354,7 @@ def profitability_index(
     return pi
 
 
-def economic_value_added(
-    nopat: Decimal, capital_employed: Decimal, wacc: Decimal
-) -> Decimal:
+def economic_value_added(nopat: Decimal, capital_employed: Decimal, wacc: Decimal) -> Decimal:
     """
     Calculate Economic Value Added (EVA).
 

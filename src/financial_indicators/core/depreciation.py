@@ -648,7 +648,9 @@ def macrs_schedule(cost: Decimal, recovery_period: int) -> pd.DataFrame:
 
 
 def composite_rate(
-    asset_costs: typing.Sequence[Decimal], salvage_values: typing.Sequence[Decimal], useful_lives: typing.Sequence[int]
+    asset_costs: typing.Sequence[Decimal],
+    salvage_values: typing.Sequence[Decimal],
+    useful_lives: typing.Sequence[int],
 ) -> Decimal:
     """
     Calculate composite depreciation rate for group of assets.
@@ -696,7 +698,9 @@ def composite_rate(
 
 
 def composite_life(
-    asset_costs: typing.Sequence[Decimal], salvage_values: typing.Sequence[Decimal], useful_lives: typing.Sequence[int]
+    asset_costs: typing.Sequence[Decimal],
+    salvage_values: typing.Sequence[Decimal],
+    useful_lives: typing.Sequence[int],
 ) -> Decimal:
     """
     Calculate composite life for group of assets.
@@ -785,9 +789,7 @@ def composite_schedule(
 
     schedule = []
 
-    for name, cost, salvage, life in zip(
-        asset_names, asset_costs, salvage_values, useful_lives
-    ):
+    for name, cost, salvage, life in zip(asset_names, asset_costs, salvage_values, useful_lives):
         validate_depreciation_inputs(cost, salvage, life)
 
         depreciable_base = cost - salvage
