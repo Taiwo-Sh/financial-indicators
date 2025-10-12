@@ -1,8 +1,7 @@
 """Input validation utilities for financial indicators."""
 
-from collections.abc import Sequence
 from decimal import Decimal
-from typing import Any
+from typing import Any, Sequence
 
 from financial_indicators.exceptions import InvalidInputError
 

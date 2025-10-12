@@ -10,6 +10,7 @@ This module implements all standard depreciation methods including:
 """
 
 from decimal import Decimal
+import typing
 
 import pandas as pd
 
@@ -484,7 +485,7 @@ def units_of_production_schedule(
     cost: Decimal,
     salvage_value: Decimal,
     total_units: Decimal,
-    units_per_period: list[Decimal],
+    units_per_period: typing.Sequence[Decimal],
 ) -> pd.DataFrame:
     """
     Generate units of production depreciation schedule.
@@ -647,7 +648,7 @@ def macrs_schedule(cost: Decimal, recovery_period: int) -> pd.DataFrame:
 
 
 def composite_rate(
-    asset_costs: list[Decimal], salvage_values: list[Decimal], useful_lives: list[int]
+    asset_costs: typing.Sequence[Decimal], salvage_values: typing.Sequence[Decimal], useful_lives: typing.Sequence[int]
 ) -> Decimal:
     """
     Calculate composite depreciation rate for group of assets.
@@ -684,7 +685,7 @@ def composite_rate(
     total_cost = 0
     total_annual_depreciation = 0
 
-    for cost, salvage, life in zip(asset_costs, salvage_values, useful_lives, strict=True):
+    for cost, salvage, life in zip(asset_costs, salvage_values, useful_lives):
         validate_depreciation_inputs(cost, salvage, life)
         total_cost += cost
         annual_dep = (cost - salvage) / Decimal(life)
@@ -695,7 +696,7 @@ def composite_rate(
 
 
 def composite_life(
-    asset_costs: list[Decimal], salvage_values: list[Decimal], useful_lives: list[int]
+    asset_costs: typing.Sequence[Decimal], salvage_values: typing.Sequence[Decimal], useful_lives: typing.Sequence[int]
 ) -> Decimal:
     """
     Calculate composite life for group of assets.
@@ -732,7 +733,7 @@ def composite_life(
     total_depreciable_base = 0
     total_annual_depreciation = 0
 
-    for cost, salvage, life in zip(asset_costs, salvage_values, useful_lives, strict=True):
+    for cost, salvage, life in zip(asset_costs, salvage_values, useful_lives):
         validate_depreciation_inputs(cost, salvage, life)
         depreciable_base = cost - salvage
         total_depreciable_base += depreciable_base
@@ -744,10 +745,10 @@ def composite_life(
 
 
 def composite_schedule(
-    asset_costs: list[Decimal],
-    salvage_values: list[Decimal],
-    useful_lives: list[int],
-    asset_names: list[str],
+    asset_costs: typing.Sequence[Decimal],
+    salvage_values: typing.Sequence[Decimal],
+    useful_lives: typing.Sequence[int],
+    asset_names: typing.Sequence[str],
 ) -> pd.DataFrame:
     """
     Generate composite depreciation schedule for asset group.
@@ -785,7 +786,7 @@ def composite_schedule(
     schedule = []
 
     for name, cost, salvage, life in zip(
-        asset_names, asset_costs, salvage_values, useful_lives, strict=True
+        asset_names, asset_costs, salvage_values, useful_lives
     ):
         validate_depreciation_inputs(cost, salvage, life)
 

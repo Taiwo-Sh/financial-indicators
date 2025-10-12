@@ -61,7 +61,7 @@ def beta(
     # Calculate covariance and variance
     covariance = sum(
         (a - asset_mean) * (m - market_mean)
-        for a, m in zip(asset_returns, market_returns, strict=True)
+        for a, m in zip(asset_returns, market_returns)
     ) / (n - 1)
 
     market_variance = sum((m - market_mean) ** 2 for m in market_returns) / (

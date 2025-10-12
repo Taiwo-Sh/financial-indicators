@@ -16,7 +16,6 @@ from . import banking  # noqa
 from . import cash_flow  # noqa
 from . import depreciation  # noqa
 from . import growth  # noqa
-from . import petroleum  # noqa
 from . import profitability  # noqa
 from . import risk  # noqa
 from . import time_value  # noqa
