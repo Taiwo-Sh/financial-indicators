@@ -1,1 +1,1 @@
-"""Test suite for the financial_indicators package."""
+"""Test suite for the feconomics package."""

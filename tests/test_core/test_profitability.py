@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import pytest
 
-from financial_indicators.core.profitability import (
+from feconomics.core.profitability import (
     ebit,
     ebitda,
     economic_value_added,
@@ -16,7 +16,7 @@ from financial_indicators.core.profitability import (
     return_on_equity,
     return_on_investment,
 )
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 from tests.conftest import assert_decimal_equal
 
 

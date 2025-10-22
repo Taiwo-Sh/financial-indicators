@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import pytest
 
-from financial_indicators.core.cash_flow import (
+from feconomics.core.cash_flow import (
     cash_flow_margin,
     cash_flow_to_sales,
     cash_return_on_assets,
@@ -14,7 +14,7 @@ from financial_indicators.core.cash_flow import (
     operating_cash_flow,
     unlevered_free_cash_flow,
 )
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 from tests.conftest import assert_decimal_equal
 
 

@@ -1,9 +1,9 @@
-[![Test](https://github.com/Taiwo-Sh/financial-indicators/actions/workflows/test.yaml/badge.svg)](https://github.com/Taiwo-Sh/financial-indicators/actions/workflows/test.yaml)
-[![Code Quality](https://github.com/Taiwo-Sh/financial-indicators/actions/workflows/code-quality.yaml/badge.svg)](https://github.com/Taiwo-Sh/financial-indicators/actions/workflows/code-quality.yaml)
+[![Test](https://github.com/Taiwo-Sh/feconomics/actions/workflows/test.yaml/badge.svg)](https://github.com/Taiwo-Sh/feconomics/actions/workflows/test.yaml)
+[![Code Quality](https://github.com/Taiwo-Sh/feconomics/actions/workflows/code-quality.yaml/badge.svg)](https://github.com/Taiwo-Sh/feconomics/actions/workflows/code-quality.yaml)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# Financial Indicators
+# feconomics
 
 A comprehensive Python library for calculating essential financial and economic metrics with precision and ease. Built for financial analysts, investment professionals, and anyone working with financial data who needs accurate, reliable calculations.
 
@@ -67,13 +67,13 @@ Calculate asset depreciation using various accounting methods including IRS-appr
 Install using pip:
 
 ```bash
-pip install financial-indicators
+pip install feconomics
 ```
 
 Or if you're using a modern Python package manager like `uv`:
 
 ```bash
-uv add financial-indicators
+uv add feconomics
 ```
 
 ### Requirements
@@ -88,7 +88,7 @@ Here's how easy it is to get started:
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import time_value, profitability, growth
+from feconomics.core import time_value, profitability, growth
 
 # Calculate NPV of an investment
 cash_flows = [
@@ -125,7 +125,7 @@ print(f"CAGR: {cagr * 100:.2f}%")  # CAGR: 10.00%
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import time_value, profitability
+from feconomics.core import time_value, profitability
 
 # Property details
 purchase_price = Decimal("500000")
@@ -162,7 +162,7 @@ print(f"Total ROI: {roi:.2f}%")
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import profitability, growth, cash_flow
+from feconomics.core import profitability, growth, cash_flow
 
 # Company financials (in millions)
 revenue = Decimal("500")
@@ -210,7 +210,7 @@ print(f"Revenue Growth: {revenue_growth * 100:.2f}%")
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import risk
+from feconomics.core import risk
 
 # Monthly returns for a stock (in decimal form)
 stock_returns = [
@@ -260,7 +260,7 @@ print(f"VaR (95%): {var_95 * 100:.2f}%")
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import depreciation
+from feconomics.core import depreciation
 
 # Equipment purchase
 equipment_cost = Decimal("50000")
@@ -315,7 +315,7 @@ print(price)  # 0.3
 All functions in this library use `Decimal` for accuracy. There's also a handy converter:
 
 ```python
-from financial_indicators import d
+from feconomics import d
 
 # Convert numbers to Decimal easily
 value = d(100.50)  # Decimal('100.50')
@@ -330,7 +330,7 @@ Specialized functions for analyzing financial institutions:
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import banking
+from feconomics.core import banking
 
 # Calculate Net Interest Margin
 nim = banking.net_interest_margin(
@@ -361,7 +361,7 @@ Manage depreciation for multiple assets:
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import depreciation
+from feconomics.core import depreciation
 
 # Multiple assets with different useful lives
 assets_costs = [
@@ -400,8 +400,8 @@ The library provides clear, actionable error messages:
 
 ```python
 from decimal import Decimal
-from financial_indicators.core import time_value
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.core import time_value
+from feconomics.exceptions import InvalidInputError
 
 try:
     # Empty cash flows
@@ -430,8 +430,8 @@ Run tests yourself:
 
 ```bash
 # Clone the repository
-git clone https://github.com/Taiwo-Sh/financial-indicators.git
-cd financial-indicators
+git clone https://github.com/Taiwo-Sh/feconomics.git
+cd feconomics
 
 # Install dependencies
 pip install -e ".[test,dev]"
@@ -440,7 +440,7 @@ pip install -e ".[test,dev]"
 pytest
 
 # Run with coverage report
-pytest --cov=financial_indicators --cov-report=html
+pytest --cov=feconomics --cov-report=html
 ```
 
 ## Contributing
@@ -458,15 +458,15 @@ Please feel free to open an issue or submit a pull request.
 
 ```bash
 # Clone and install in development mode
-git clone https://github.com/Taiwo-Sh/financial-indicators.git
-cd financial-indicators
+git clone https://github.com/Taiwo-Sh/feconomics.git
+cd feconomics
 pip install -e ".[test,dev]"
 
 # Run linting
 ruff check .
 
 # Run type checking
-mypy src/financial_indicators
+mypy src/feconomics
 
 # Run tests
 pytest

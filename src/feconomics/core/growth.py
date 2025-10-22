@@ -2,7 +2,7 @@
 
 from decimal import Decimal
 
-from financial_indicators.validation import validate_non_zero, validate_positive
+from feconomics.validation import validate_non_zero, validate_positive
 
 
 def revenue_growth_rate(revenue_current: Decimal, revenue_previous: Decimal) -> Decimal:
@@ -105,7 +105,7 @@ def compound_annual_growth_rate(
     """
     validate_positive(beginning_value, "beginning_value")
     if num_years <= 0:
-        from financial_indicators.exceptions import InvalidInputError
+        from feconomics.exceptions import InvalidInputError
 
         raise InvalidInputError(f"num_years must be positive, got {num_years}")
 

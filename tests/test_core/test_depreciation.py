@@ -5,7 +5,7 @@ from decimal import Decimal
 import pandas as pd
 import pytest
 
-from financial_indicators.core.depreciation import (
+from feconomics.core.depreciation import (
     book_value_at_year,
     composite_life,
     composite_rate,
@@ -17,7 +17,7 @@ from financial_indicators.core.depreciation import (
     units_of_production_per_unit,
     units_of_production_period,
 )
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 from tests.conftest import assert_decimal_equal
 
 

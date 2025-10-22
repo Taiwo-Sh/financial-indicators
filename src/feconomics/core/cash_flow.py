@@ -2,7 +2,7 @@
 
 from decimal import Decimal
 
-from financial_indicators.validation import validate_positive
+from feconomics.validation import validate_positive
 
 
 def free_cash_flow(operating_cash_flow: Decimal, capital_expenditures: Decimal) -> Decimal:

@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "financial-indicators"
+name = "feconomics"
 version = "0.1.0"
 description = "Essential financial and economic indicators"
 readme = "README.md"
@@ -50,7 +50,7 @@ python_functions = ["test_*"]
 addopts = [
     "-v",
     "--strict-markers",
-    "--cov=src/financial_indicators",
+    "--cov=src/feconomics",
     "--cov-report=term-missing",
     "--cov-report=html",
 ]

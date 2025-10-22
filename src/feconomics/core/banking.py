@@ -2,8 +2,8 @@
 
 from decimal import Decimal
 
-from financial_indicators.exceptions import InvalidInputError
-from financial_indicators.validation import validate_non_negative, validate_positive
+from feconomics.exceptions import InvalidInputError
+from feconomics.validation import validate_non_negative, validate_positive
 
 
 def net_interest_margin(net_interest_income: Decimal, average_earning_assets: Decimal) -> Decimal:

@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import pytest
 
-from financial_indicators.core.risk import (
+from feconomics.core.risk import (
     beta,
     conditional_var,
     maximum_drawdown,
@@ -14,7 +14,7 @@ from financial_indicators.core.risk import (
     value_at_risk_historical,
     variance,
 )
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 from tests.conftest import assert_decimal_equal
 
 

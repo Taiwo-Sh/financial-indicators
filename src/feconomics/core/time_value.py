@@ -3,9 +3,9 @@
 import typing
 from decimal import Decimal
 
-from financial_indicators.constants import DEFAULT_MAX_ITERATIONS, DEFAULT_TOLERANCE
-from financial_indicators.exceptions import ConvergenceError, InvalidInputError
-from financial_indicators.validation import (
+from feconomics.constants import DEFAULT_MAX_ITERATIONS, DEFAULT_TOLERANCE
+from feconomics.exceptions import ConvergenceError, InvalidInputError
+from feconomics.validation import (
     validate_non_empty,
     validate_non_negative,
     validate_positive,

@@ -14,8 +14,8 @@ import typing
 
 import pandas as pd
 
-from financial_indicators.exceptions import InvalidInputError
-from financial_indicators.validation import validate_non_negative, validate_positive
+from feconomics.exceptions import InvalidInputError
+from feconomics.validation import validate_non_negative, validate_positive
 
 # MACRS Percentage Tables (IRS Publication 946)
 MACRS_TABLES = {

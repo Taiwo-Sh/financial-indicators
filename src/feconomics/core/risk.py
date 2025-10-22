@@ -3,8 +3,8 @@
 from decimal import Decimal
 import typing
 
-from financial_indicators.exceptions import InvalidInputError
-from financial_indicators.validation import validate_non_empty, validate_positive
+from feconomics.exceptions import InvalidInputError
+from feconomics.validation import validate_non_empty, validate_positive
 
 
 def beta(

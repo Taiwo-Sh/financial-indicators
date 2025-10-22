@@ -4,14 +4,14 @@ from decimal import Decimal
 
 import pytest
 
-from financial_indicators.core.growth import (
+from feconomics.core.growth import (
     compound_annual_growth_rate,
     earnings_growth_rate,
     retention_ratio,
     revenue_growth_rate,
     sustainable_growth_rate,
 )
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 from tests.conftest import assert_decimal_equal
 
 
