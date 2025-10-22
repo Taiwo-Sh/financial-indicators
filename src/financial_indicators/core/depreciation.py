@@ -182,7 +182,7 @@ def straight_line_schedule(cost: Decimal, salvage_value: Decimal, useful_life: i
     annual_depreciation = straight_line_annual(cost, salvage_value, useful_life)
 
     schedule = []
-    accumulated = 0
+    accumulated = Decimal("0")
 
     for year in range(1, useful_life + 1):
         accumulated += annual_depreciation
@@ -278,7 +278,7 @@ def declining_balance_schedule(
 
     schedule = []
     book_value = cost
-    accumulated = 0
+    accumulated = Decimal("0")
     rate = factor / Decimal(useful_life)
 
     for year in range(1, useful_life + 1):
@@ -385,7 +385,7 @@ def sum_of_years_digits_schedule(
     validate_depreciation_inputs(cost, salvage_value, useful_life)
 
     schedule = []
-    accumulated = 0
+    accumulated = Decimal("0")
     syd = Decimal(useful_life * (useful_life + 1)) / Decimal("2")
 
     for year in range(1, useful_life + 1):
@@ -524,8 +524,8 @@ def units_of_production_schedule(
     per_unit = units_of_production_per_unit(cost, salvage_value, total_units)
 
     schedule = []
-    accumulated = 0
-    cumulative_units = 0
+    accumulated = Decimal("0")
+    cumulative_units = Decimal("0")
 
     for period, units in enumerate(units_per_period, start=1):
         depreciation = per_unit * units
@@ -627,7 +627,7 @@ def macrs_schedule(cost: Decimal, recovery_period: int) -> pd.DataFrame:
 
     table = MACRS_TABLES[recovery_period]
     schedule = []
-    accumulated = 0
+    accumulated = Decimal("0")
 
     for year, percentage in enumerate(table, start=1):
         depreciation = cost * (percentage / 100)
@@ -684,8 +684,8 @@ def composite_rate(
     if not asset_costs:
         raise InvalidInputError("asset_costs cannot be empty")
 
-    total_cost = 0
-    total_annual_depreciation = 0
+    total_cost = Decimal("0")
+    total_annual_depreciation = Decimal("0")
 
     for cost, salvage, life in zip(asset_costs, salvage_values, useful_lives):
         validate_depreciation_inputs(cost, salvage, life)
@@ -734,8 +734,8 @@ def composite_life(
     if not asset_costs:
         raise InvalidInputError("asset_costs cannot be empty")
 
-    total_depreciable_base = 0
-    total_annual_depreciation = 0
+    total_depreciable_base = Decimal("0")
+    total_annual_depreciation = Decimal("0")
 
     for cost, salvage, life in zip(asset_costs, salvage_values, useful_lives):
         validate_depreciation_inputs(cost, salvage, life)

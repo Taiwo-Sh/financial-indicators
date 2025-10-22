@@ -44,7 +44,7 @@ def net_present_value(cash_flows: typing.Sequence[Decimal], discount_rate: Decim
     validate_non_empty(cash_flows, "cash_flows")
     validate_non_negative(discount_rate, "discount_rate")
 
-    npv = 0
+    npv = Decimal("0")
     for t, cf in enumerate(cash_flows):
         npv += cf / ((1 + discount_rate) ** t)
 
@@ -100,8 +100,8 @@ def internal_rate_of_return(
 
     for _ in range(max_iterations):
         # Calculate NPV and its derivative
-        npv = 0
-        npv_derivative = 0
+        npv = Decimal("0")
+        npv_derivative = Decimal("0")
 
         for t, cf in enumerate(cash_flows):
             discount_factor = (1 + irr) ** t
@@ -297,7 +297,7 @@ def payback_period(cash_flows: typing.Sequence[Decimal]) -> typing.Optional[Deci
     """
     validate_non_empty(cash_flows, "cash_flows")
 
-    cumulative = 0
+    cumulative = Decimal("0")
     for period, cf in enumerate(cash_flows):
         cumulative += cf
         if cumulative >= 0 and period > 0:
@@ -344,7 +344,7 @@ def discounted_payback_period(
     validate_non_empty(cash_flows, "cash_flows")
     validate_non_negative(discount_rate, "discount_rate")
 
-    cumulative = 0
+    cumulative = Decimal("0")
     for period, cf in enumerate(cash_flows):
         discounted_cf = cf / ((1 + discount_rate) ** period)
         cumulative += discounted_cf

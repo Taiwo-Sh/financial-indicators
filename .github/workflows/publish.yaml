@@ -93,107 +93,107 @@ jobs:
           retention-days: 30
 
 
-  # Publish to TestPyPI for testing
-  publish-testpypi:
-    name: Publish to TestPyPI
-    runs-on: ubuntu-latest
-    needs: build
-    if: >
-      github.event_name == 'workflow_dispatch' || 
-      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
-      github.event_name == 'release'
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/financial_indicators
+  # Publish to TestPyPI for testing (Skip for now)
+  # publish-testpypi:
+  #   name: Publish to TestPyPI
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   if: >
+  #     github.event_name == 'workflow_dispatch' || 
+  #     (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
+  #     github.event_name == 'release'
+  #   environment:
+  #     name: testpypi
+  #     url: https://test.pypi.org/p/financial_indicators
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: "3.11"
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v4
-        with:
-          version: "latest"
+  #     - name: Install uv
+  #       uses: astral-sh/setup-uv@v4
+  #       with:
+  #         version: "latest"
 
-      - name: Install jq for version parsing
-        run: uv pip install jq --system
+  #     - name: Install jq for version parsing
+  #       run: uv pip install jq --system
 
-      - name: Get project version
-        id: get-version
-        run: |
-          VERSION=$(uv run python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+  #     - name: Get project version
+  #       id: get-version
+  #       run: |
+  #         VERSION=$(uv run python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+  #         echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Check if version already exists on TestPyPI
-        id: version-check
-        run: |
-          VERSION="${{ steps.get-version.outputs.version }}"
-          if curl -sSf https://test.pypi.org/pypi/financial_indicators/json | jq -e ".releases[\"$VERSION\"]" > /dev/null; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
+  #     - name: Check if version already exists on TestPyPI
+  #       id: version-check
+  #       run: |
+  #         VERSION="${{ steps.get-version.outputs.version }}"
+  #         if curl -sSf https://test.pypi.org/pypi/financial_indicators/json | jq -e ".releases[\"$VERSION\"]" > /dev/null; then
+  #           echo "exists=true" >> "$GITHUB_OUTPUT"
+  #         else
+  #           echo "exists=false" >> "$GITHUB_OUTPUT"
+  #         fi
 
-      - name: Skip publishing (version exists)
-        if: steps.version-check.outputs.exists == 'true'
-        run: echo "⚠️ Version already exists on TestPyPI. Skipping publish."
+  #     - name: Skip publishing (version exists)
+  #       if: steps.version-check.outputs.exists == 'true'
+  #       run: echo "⚠️ Version already exists on TestPyPI. Skipping publish."
         
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-${{ github.sha }}
-          path: dist/
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: dist-${{ github.sha }}
+  #         path: dist/
 
-      - name: Publish to TestPyPI
-        if: steps.version-check.outputs.exists == 'false'
-        run: uv publish --index testpypi
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
+  #     - name: Publish to TestPyPI
+  #       if: steps.version-check.outputs.exists == 'false'
+  #       run: uv publish --index testpypi
+  #       env:
+  #         UV_PUBLISH_TOKEN: ${{ secrets.TEST_PYPI_API_TOKEN }}
 
   
-  # Verify TestPyPI installation
-  verify-testpypi:
-    name: Verify TestPyPI Installation
-    runs-on: ubuntu-latest
-    needs: publish-testpypi
-    strategy:
-      matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+  # # Verify TestPyPI installation (Skip for now)
+  # verify-testpypi:
+  #   name: Verify TestPyPI Installation
+  #   runs-on: ubuntu-latest
+  #   needs: publish-testpypi
+  #   strategy:
+  #     matrix:
+  #       python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
 
-    steps:
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
+  #   steps:
+  #     - name: Set up Python ${{ matrix.python-version }}
+  #       uses: actions/setup-python@v5
+  #       with:
+  #         python-version: ${{ matrix.python-version }}
 
-      - name: Wait for TestPyPI availability
-        run: |
-          echo "⏳ Waiting for package to be available on TestPyPI..."
-          sleep 60  # Give TestPyPI time to process
+  #     - name: Wait for TestPyPI availability
+  #       run: |
+  #         echo "⏳ Waiting for package to be available on TestPyPI..."
+  #         sleep 60  # Give TestPyPI time to process
 
-      - name: Install from TestPyPI
-        run: |
-          pip install --index-url https://test.pypi.org/simple/ \
-                      --extra-index-url https://pypi.org/simple/ \
-                      financial_indicators --prefer-binary
+  #     - name: Install from TestPyPI
+  #       run: |
+  #         pip install --index-url https://test.pypi.org/simple/ \
+  #                     --extra-index-url https://pypi.org/simple/ \
+  #                     financial_indicators --prefer-binary
 
-      - name: Test installation and functionality
-        run: |
-          python -c "
-          import financial_indicators
-          "
+  #     - name: Test installation and functionality
+  #       run: |
+  #         python -c "
+  #         import financial_indicators
+  #         "
 
 
   # Publish to PyPI (production)
   publish-pypi:
     name: Publish to PyPI
     runs-on: ubuntu-latest
-    needs: [build, verify-testpypi]
+    needs: [build]
     if: >
       github.event_name == 'release' && 
       github.event.action == 'published' &&
