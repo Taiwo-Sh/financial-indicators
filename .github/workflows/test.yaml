@@ -108,11 +108,11 @@ jobs:
       - name: Install built package
         run: |
           cd dist
-          uv pip install --system financial_indicators-*.whl
+          uv pip install --system feconomics-*.whl
 
       - name: Test installation
         run: |
           python -c "
-          import financial_indicators
+          import feconomics
           print('✅ Package installed and imports work')
           "

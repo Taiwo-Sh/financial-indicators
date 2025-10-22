@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import pytest
 
-from financial_indicators.core.banking import (
+from feconomics.core.banking import (
     capital_adequacy_ratio,
     coverage_ratio,
     efficiency_ratio,
@@ -15,7 +15,7 @@ from financial_indicators.core.banking import (
     non_performing_loan_ratio,
     tier1_capital_ratio,
 )
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 from tests.conftest import assert_decimal_equal
 
 

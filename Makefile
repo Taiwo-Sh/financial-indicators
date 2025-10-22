@@ -30,15 +30,15 @@ test-watch: ## Run tests in watch mode
 	uv run pytest-watch --onpass "echo 'Tests passed'" --onfail "echo 'Tests failed'" -- -v --tb=short 
 
 test-coverage: ## Run tests with coverage
-	uv run pytest --cov=src/financial_indicators --cov-branch --cov-report=term-missing --cov-fail-under=80
+	uv run pytest --cov=src/feconomics --cov-branch --cov-report=term-missing --cov-fail-under=80
 	@echo "Coverage report generated. Check the terminal output for details."
 
 test-coverage-xml: ## Run tests with coverage and generate XML report
-	uv run pytest --cov=src/financial_indicators --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=80
+	uv run pytest --cov=src/feconomics --cov-branch --cov-report=xml:coverage.xml --cov-fail-under=80
 	@echo "Coverage report generated at coverage.xml"
 
 test-coverage-html: ## Run tests with coverage and generate HTML report
-	uv run pytest --cov=src/financial_indicators --cov-branch --cov-report=html:coverage_html_report --cov-fail-under=80
+	uv run pytest --cov=src/feconomics --cov-branch --cov-report=html:coverage_html_report --cov-fail-under=80
 	@echo "HTML coverage report generated at coverage_html_report/index.html"
 
 # Code quality targets

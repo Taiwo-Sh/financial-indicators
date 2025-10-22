@@ -3,7 +3,7 @@
 from decimal import Decimal
 from typing import Any, Sequence
 
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 
 
 def validate_positive(value: Decimal, param_name: str) -> None:

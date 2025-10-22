@@ -4,7 +4,7 @@ from decimal import Decimal
 
 import pytest
 
-from financial_indicators.core.time_value import (
+from feconomics.core.time_value import (
     annuity_present_value,
     discounted_payback_period,
     future_value,
@@ -13,7 +13,7 @@ from financial_indicators.core.time_value import (
     payback_period,
     present_value,
 )
-from financial_indicators.exceptions import InvalidInputError
+from feconomics.exceptions import InvalidInputError
 from tests.conftest import assert_decimal_equal
 
 

@@ -81,7 +81,7 @@ jobs:
           uv venv test-env
           uv pip install dist/*.whl
           uv run python -c "
-          import financial_indicators
+          import feconomics
           print('✅ Built package works correctly')
           "
       
@@ -104,7 +104,7 @@ jobs:
   #     github.event_name == 'release'
   #   environment:
   #     name: testpypi
-  #     url: https://test.pypi.org/p/financial_indicators
+  #     url: https://test.pypi.org/p/feconomics
 
   #   steps:
   #     - name: Checkout code
@@ -133,7 +133,7 @@ jobs:
   #       id: version-check
   #       run: |
   #         VERSION="${{ steps.get-version.outputs.version }}"
-  #         if curl -sSf https://test.pypi.org/pypi/financial_indicators/json | jq -e ".releases[\"$VERSION\"]" > /dev/null; then
+  #         if curl -sSf https://test.pypi.org/pypi/feconomics/json | jq -e ".releases[\"$VERSION\"]" > /dev/null; then
   #           echo "exists=true" >> "$GITHUB_OUTPUT"
   #         else
   #           echo "exists=false" >> "$GITHUB_OUTPUT"
@@ -180,12 +180,12 @@ jobs:
   #       run: |
   #         pip install --index-url https://test.pypi.org/simple/ \
   #                     --extra-index-url https://pypi.org/simple/ \
-  #                     financial_indicators --prefer-binary
+  #                     feconomics --prefer-binary
 
   #     - name: Test installation and functionality
   #       run: |
   #         python -c "
-  #         import financial_indicators
+  #         import feconomics
   #         "
 
 
@@ -201,7 +201,7 @@ jobs:
       (github.event.inputs.test_only != 'true' || github.event.inputs.test_only == '')
     environment:
       name: pypi
-      url: https://pypi.org/p/financial_indicators
+      url: https://pypi.org/p/feconomics
 
     steps:
       - name: Checkout code
@@ -230,7 +230,7 @@ jobs:
         id: version-check
         run: |
           VERSION="${{ steps.get-version.outputs.version }}"
-          if curl -sSf https://pypi.org/pypi/financial_indicators/json | jq -e ".releases[\"$VERSION\"]" > /dev/null; then
+          if curl -sSf https://pypi.org/pypi/feconomics/json | jq -e ".releases[\"$VERSION\"]" > /dev/null; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
@@ -286,13 +286,13 @@ jobs:
           sleep 120  # Give PyPI time to process
 
       - name: Install from PyPI
-        run: pip install financial_indicators
+        run: pip install feconomics
 
       - name: Verify installation
         run: |
           python -c "
-          import financial_indicators
-          print(f'✅🎉 Successfully installed financial_indicators {getattr(financial_indicators, \"__version__\", \"unknown\")} from PyPI')
+          import feconomics
+          print(f'✅🎉 Successfully installed feconomics {getattr(feconomics, \"__version__\", \"unknown\")} from PyPI')
           "
       
       - name: Create release summary
@@ -306,4 +306,4 @@ jobs:
           echo "- ✅ TestPyPI installation verified" >> $GITHUB_STEP_SUMMARY
           echo "- ✅ Published to PyPI" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📦 Package is now available: \`pip install financial_indicators\`" >> $GITHUB_STEP_SUMMARY
+          echo "📦 Package is now available: \`pip install feconomics\`" >> $GITHUB_STEP_SUMMARY

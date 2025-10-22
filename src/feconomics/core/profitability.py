@@ -2,7 +2,7 @@
 
 from decimal import Decimal
 
-from financial_indicators.validation import validate_non_zero, validate_positive
+from feconomics.validation import validate_non_zero, validate_positive
 
 
 def return_on_investment(net_profit: Decimal, total_investment: Decimal) -> Decimal:
