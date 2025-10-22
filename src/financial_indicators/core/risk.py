@@ -1,7 +1,7 @@
 """Risk metrics for financial analysis."""
 
-import typing
 from decimal import Decimal
+import typing
 
 from financial_indicators.exceptions import InvalidInputError
 from financial_indicators.validation import validate_non_empty, validate_positive
@@ -342,7 +342,7 @@ def maximum_drawdown(values: typing.Sequence[Decimal]) -> Decimal:
     """
     validate_non_empty(values, "values")
 
-    max_dd = 0
+    max_dd = Decimal("0")
     peak = values[0]
 
     for value in values[1:]:
